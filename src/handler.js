@@ -118,6 +118,22 @@ class Handler {
         return resultString
     }
 
+    getLastNotGenChar(hphm) {  
+        // 获取最后一个字符  
+        const lastChar = hphm.charAt(hphm.length - 1);  
+        
+        // 正则表达式判断最后一个字符是否为数字或英文字符  
+        const isAlphanumeric = /^[a-zA-Z0-9]$/.test(lastChar);  
+        
+        // 如果不是数字或英文字符，返回最后一个字符  
+        if (!isAlphanumeric) {  
+            return lastChar;  
+        }  
+        
+        // 如果是数字或英文字符，返回 null 或其他处理  
+        return null; // 或者返回提示信息  
+    } 
+
     // 汽车类型
     handle_id_type_stat(dataArray) {
 
@@ -130,7 +146,12 @@ class Handler {
 
 
             let hphm = item.hphm;
-            const stat = (hphm.length == '8') ? '绿牌车' : '蓝牌车';
+            let stat = (hphm.length == '8') ? '绿牌' : '蓝牌';
+            //如果是港字结尾，那么是港牌车
+            let lastChar = this.getLastNotGenChar(hphm)
+            if (lastChar != null) {
+                stat = lastChar + '牌'
+            }
 
             counts[stat] = (counts[stat] || 0) + 1;
         });
