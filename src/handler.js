@@ -35,7 +35,13 @@ class Handler {
         resultString += '\n\n通过率统计:\n';
         resultString += this.handle_default_stat(dataArray, 'result', false);
 
-        resultString += '\n\n下面统计只包含审核通过\n\n';
+        resultString += '\n下面统计只包含审核通过';
+
+        resultString += '\n\n举报最多的一天:\n';
+        resultString += this.handle_upload_stat(dataArray);
+
+        resultString += '\n\n违法最多的一天:\n';
+        resultString += this.handle_occur_stat(dataArray);
 
         resultString += '\n\n行为统计:\n';
         resultString += this.handle_default_stat(dataArray, 'wfxw', true);
@@ -160,6 +166,45 @@ class Handler {
         return resultString
     }
 
+       // 举报最多的一天
+    handle_upload_stat(dataArray) {
+
+        let counts = {}
+
+        dataArray.forEach(item => {
+            if (item.result != '审核通过')
+                return;
+
+            let upload_time = item.upload_time;
+            const stat = upload_time.substring(0, 10);
+
+            counts[stat] = (counts[stat] || 0) + 1;
+        });
+
+        let resultString = this.createStatisticsStringOrderByKey(counts) // 排序
+        //只获取第一行
+        return resultString.split('\n')[0]
+    }
+
+    // 违法最多的一天
+    handle_occur_stat(dataArray) {
+
+        let counts = {}
+
+        dataArray.forEach(item => {
+            if (item.result != '审核通过')
+                return;
+
+            let occurtime = item.occurtime;
+            const stat = occurtime.substring(0, 10);
+
+            counts[stat] = (counts[stat] || 0) + 1;
+        });
+
+        let resultString = this.createStatisticsStringOrderByKey(counts) // 排序
+        //只获取第一行
+        return resultString.split('\n')[0]
+    }
 
 
 
@@ -245,6 +290,7 @@ class JJInfo {
         this.hphm = data.hphm || "";
         this.occuraddress = data.occuraddress.replace(/,/g, "，") || "";
         this.occurtime = data.occurtime || "";
+        this.upload_time = data.uptime || "";
         this.status = data.status || "";
         this.result = this.getResult(this.status);
         this.uptime = data.uptime || "";
@@ -277,6 +323,7 @@ class JJInfo {
             "地点": this.occuraddress,
             "时间": this.occurtime,
             "审核结果": this.result,
+            "提交时间": this.uptime,
             // "上报时间": this.uptime || "",  
             "结果": this.tbyy,
             "行为": this.wfxw

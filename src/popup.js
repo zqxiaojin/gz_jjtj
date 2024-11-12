@@ -10,11 +10,18 @@ function setStatusText(text) {
     statusDiv.style.display = 'block';
 }
 
+function setResultText(text) {
+    const statusDiv = document.getElementById('result');
+    statusDiv.textContent = text;
+    statusDiv.style.display = 'block';
+}
+
 // 处理从背景脚本返回的状态  
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'requestCompleted') {
         navigator.clipboard.writeText(request.res);
         setStatusText('请求已完成，已经把统计内容复制到剪切板');
+        setResultText(request.res)
     } else if (request.action === 'requestFailed') {
         setStatusText('请求失败');
     } else if (request.action === 'sendingRequest') {
