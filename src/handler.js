@@ -37,10 +37,10 @@ class Handler {
 
         resultString += '\n下面统计只包含审核通过';
 
-        resultString += '\n\n举报最多的一天:\n';
+        resultString += '\n\n提交举报最多的一天:\n';
         resultString += this.handle_upload_stat(dataArray);
 
-        resultString += '\n\n违法最多的一天:\n';
+        resultString += '\n\n遇到违反交规最多的一天:\n';
         resultString += this.handle_occur_stat(dataArray);
 
         resultString += '\n\n行为统计:\n';
