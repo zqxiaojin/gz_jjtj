@@ -181,7 +181,7 @@ class Handler {
             counts[stat] = (counts[stat] || 0) + 1;
         });
 
-        let resultString = this.createStatisticsStringOrderByKey(counts) // 排序
+        let resultString = this.createStatisticsStringOrderByCount(counts) // 排序
         //只获取第一行
         return resultString.split('\n')[0]
     }
@@ -201,7 +201,7 @@ class Handler {
             counts[stat] = (counts[stat] || 0) + 1;
         });
 
-        let resultString = this.createStatisticsStringOrderByKey(counts) // 排序
+        let resultString = this.createStatisticsStringOrderByCount(counts) // 排序
         //只获取第一行
         return resultString.split('\n')[0]
     }
