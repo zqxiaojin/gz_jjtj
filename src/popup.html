@@ -7,7 +7,7 @@
     <style>  
         body {  
             font-family: Arial, sans-serif;  
-            width: 200px;  
+            width: 300px;  
         }  
         #status {  
             margin-top: 10px;  
@@ -17,8 +17,10 @@
 </head>  
 <body>  
     <button id="copyButton">开始统计</button>  
-    <div id="status" style="display:none;"></div>  
-    <textarea  id="result" style="display:none;" rows="5"></textarea>  
+    <div id="status" style="display:none;" width="100%"></div>  
+    <div style="display: block;" width="100%">
+        <textarea  id="result" style="display:none;" rows="8" width="100%"></textarea>  
+    </div>
     <script src="popup.js"></script>  
 </body>  
 </html> 

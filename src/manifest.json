@@ -1,7 +1,7 @@
 {  
   "manifest_version": 3,  
   "name": "广州交警举报统计助手",  
-  "version": "1.3",  
+  "version": "1.5",  
   "description": "在违法举报列表页，自动请求所有数据并且进行统计.",  
   "host_permissions": [  
     "https://cgsqy.gzjd.gov.cn/*"  

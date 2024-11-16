@@ -20,7 +20,7 @@ function setResultText(text) {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'requestCompleted') {
         navigator.clipboard.writeText(request.res);
-        setStatusText('请求已完成，已经把统计内容复制到剪切板');
+        setStatusText('已完成，已把统计内容复制到剪切板，内容如下：');
         setResultText(request.res)
     } else if (request.action === 'requestFailed') {
         setStatusText('请求失败');
