@@ -14,10 +14,26 @@ class Handler {
         return extractedContent;
     }
 
+    formatDate(date,format = "YYYY年MM月DD日") {  
+        const year = date.getFullYear();  
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份从 0 开始，需要加 1  
+        const day = String(date.getDate()).padStart(2, "0");  
+    
+        return format  
+            .replace("YYYY", year)  
+            .replace("MM", month)  
+            .replace("DD", day);  
+    }
 
-    processData() {
+    processData(startDate, endDate) {
 
-        const statisticsString = this.analyzeData(this.jjInfoList);
+        var statisticsString = this.analyzeData(this.jjInfoList);
+
+        if (startDate != undefined && endDate != undefined) {
+            var dateStr = "统计" + this.formatDate(startDate) + "至" + this.formatDate(endDate) + "的所有举报\n"
+            statisticsString = dateStr + statisticsString;
+        }
+
         console.log(statisticsString);
 
         console.log("结果写入到剪切板");
@@ -124,21 +140,21 @@ class Handler {
         return resultString
     }
 
-    getLastNotGenChar(hphm) {  
+    getLastNotGenChar(hphm) {
         // 获取最后一个字符  
-        const lastChar = hphm.charAt(hphm.length - 1);  
-        
+        const lastChar = hphm.charAt(hphm.length - 1);
+
         // 正则表达式判断最后一个字符是否为数字或英文字符  
-        const isAlphanumeric = /^[a-zA-Z0-9]$/.test(lastChar);  
-        
+        const isAlphanumeric = /^[a-zA-Z0-9]$/.test(lastChar);
+
         // 如果不是数字或英文字符，返回最后一个字符  
-        if (!isAlphanumeric) {  
-            return lastChar;  
-        }  
-        
+        if (!isAlphanumeric) {
+            return lastChar;
+        }
+
         // 如果是数字或英文字符，返回 null 或其他处理  
         return null; // 或者返回提示信息  
-    } 
+    }
 
     // 汽车类型
     handle_id_type_stat(dataArray) {
@@ -166,7 +182,7 @@ class Handler {
         return resultString
     }
 
-       // 举报最多的一天
+    // 举报最多的一天
     handle_upload_stat(dataArray) {
 
         let counts = {}

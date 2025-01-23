@@ -7,19 +7,64 @@
     <style>  
         body {  
             font-family: Arial, sans-serif;  
-            width: 300px;  
+            width: 380px;
+            height: 380px;
         }  
         #status {  
             margin-top: 10px;  
             color: green;  
-        }  
+        }
+        .outputText {
+            display:block; 
+            width:100%;
+             height: 100%; 
+        }
     </style>  
+
+    <link rel="stylesheet" href="./flatpickr.min.css">  
+    <script src="./flatpickr.js"></script>  
+
+    <style>  
+        /* 自定义 Flatpickr 样式 */  
+        .flatpickr-calendar {  
+            border-radius: 8px;  
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+        }  
+        .flatpickr-day.selected {  
+            background-color: #4CAF50;  
+            border-color: #4CAF50;  
+        }  
+        .flatpickr-day.today {  
+            border-color: #4CAF50;  
+        }  
+        .flatpickr-day.today:hover {  
+            background-color: #4CAF50;  
+            color: white;  
+        }  
+        .flatpickr-input {  
+            padding: 10px;  
+            font-size: 16px;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            width: 100%;  
+            box-sizing: border-box;  
+        }  
+    </style> 
+
+
+
 </head>  
-<body>  
-    <button id="copyButton">开始统计</button>  
-    <div id="status" style="display:none;" width="100%"></div>  
-    <div style="display: block;" width="100%">
-        <textarea  id="result" style="display:none;" rows="8" width="100%"></textarea>  
+<body>
+    <div>
+    <input type="text" id="dateRangePicker" placeholder="默认统计所有记录，点击可选择日期范围">  
+</div>
+ <br>
+<div>
+     <button id="lastYearBtn">统计unknow年</button>  <button id="last365DaysBtn" style="margin-left: 5px;" >选择365天</button>     <button id="dateRangeBtn" style="margin-left: 30px;">开始统计</button>  
+</div>
+    <div id="status" style="display:none; width:100%"></div>  
+    <div style="display:block;" class="outputText">
+        <textarea  id="result" style="display:none;" class="outputText"></textarea>  
     </div>
     <script src="popup.js"></script>  
 </body>  
