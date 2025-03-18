@@ -66,9 +66,16 @@ function startRequestWithOpenId(openId, pageNo, startDate, endDate) {
                     const nextDay = new Date(endDate);  //magic: 需要加一天，确保时间范围正确
                     nextDay.setDate(endDate.getDate() + 1);
                     if (upDate < startDate || upDate > nextDay) {
-                        //过滤掉不符合时间范围的
-                        console.log("过滤掉" + j.upload_time)
-                        continue
+                        if (upDate < startDate) {//更旧的数据就不查了，浪费时间
+                            console.log("请求完成");
+                            //完成的时候需要告知时间范围
+                            handlerInstance.processData(startDate, endDate);
+                            return;
+                        } else {
+                            //过滤掉不符合时间范围的
+                            console.log("过滤掉" + j.upload_time)
+                            continue
+                        }
                     }
                 }
 
